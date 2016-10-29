@@ -21,6 +21,9 @@ class MovieDetailViewController: UIViewController, RatingLabelDelegate {
     @IBOutlet weak var genreLabel: UILabel!
     @IBOutlet weak var ratingLabel: RatingLabel!
     @IBOutlet weak var watchButton: UIButton!
+    @IBOutlet weak var ratingValueLabel: UILabel!
+    @IBOutlet weak var sumaryText: UITextView!
+    @IBOutlet weak var movieImage: UIImageView!
     
     // MARK: IBActions
     
@@ -38,10 +41,28 @@ class MovieDetailViewController: UIViewController, RatingLabelDelegate {
     // MARK: Rating Label Delegate
     
     func didSetRating(sender: RatingLabel) {
-        
+        self.ratingValueLabel.text = "\(sender.rating)"
     }
     
     
+    func formatMillis(ms: Int) -> String {
+        let secs = ms / 1000
+        let mins = secs / 60
+        let hrs = mins / 60
+        return "\(hrs):\(mins % 60):\(secs % 60)"
+    }
+    
+    func loadImage(path: String) {
+        let url = URL(string: path)!
+        let session = URLSession.shared.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                return
+            }
+            
+            self.movieImage.image = UIImage(data: data)
+        }
+        session.resume()
+    }
     
     
     func loadMovie(id: String) {
@@ -82,7 +103,15 @@ class MovieDetailViewController: UIViewController, RatingLabelDelegate {
                 DispatchQueue.main.async {
                     self.titleLabel.text = trackName
                     self.genreLabel.text = primaryGenreName
-                    self.timeLabel.text = releaseDate
+                    self.timeLabel.text = self.formatMillis(ms: trackTimeMillis)
+                    self.sumaryText.text = longDescription
+                    self.loadImage(path: artworkUrl100)
+                    
+                    if let rating = WatchList.sharedInstance.getRatingFor(id: id) {
+                        self.ratingValueLabel.text = "\(rating)"
+                    } else {
+                        self.ratingValueLabel.text = ""
+                    }
                 }
             }
             session.resume()
@@ -119,7 +148,7 @@ class MovieDetailViewController: UIViewController, RatingLabelDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        
+        ratingLabel.delegate = self
     }
 
     override func didReceiveMemoryWarning() {

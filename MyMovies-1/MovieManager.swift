@@ -63,6 +63,8 @@ class MovieManager {
             
             print("Entries: \(entries.count)")
             
+            self.movies = []
+            
             for entry in entries {
                 guard let name = entry["im:name"]["label"].string,
                     let category = entry["category"]["attributes"]["label"].string,

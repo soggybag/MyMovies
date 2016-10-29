@@ -16,7 +16,6 @@ protocol WatchListDelegate {
 
 // Singleton
 class WatchList {
-    
     // This is a singleton
     
     static let sharedInstance = WatchList()
@@ -53,6 +52,11 @@ class WatchList {
             watchList[id] = rating
             saveWatchList()
         }
+    }
+    
+    func removeMovie(id: String) {
+        watchList.removeValue(forKey: id)
+        saveWatchList()
     }
     
     func setRatingFor(id: String, rating: Int) {

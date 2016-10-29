@@ -98,9 +98,11 @@ class Top25TableViewController: UITableViewController, MovieManagerDelegate {
         print(WatchList.sharedInstance.getRatingFor(id: movie.id))
         
         if let rating = WatchList.sharedInstance.getRatingFor(id: movie.id) {
-            // cell.ratingLabel.rating = rating
+            cell.ratingLabel.text = "\(rating)"
+            cell.starsLabel.rating = rating
         } else {
-            // cell.ratingLabel.text = "n/a"
+            cell.starsLabel.rating = 0
+            cell.ratingLabel.text = "n/a"
         }
 
         return cell

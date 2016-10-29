@@ -81,6 +81,16 @@ WatchListDelegate {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let remove = UITableViewRowAction(style: .default, title: "Remove") { (action, indexPath) in
+            WatchList.sharedInstance.removeMovie(id: self.watchedArray[indexPath.row].id)
+            self.watchedArray.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .left)
+        }
+        
+        return [remove]
+    }
+    
     
     // MARK: Watch List Delegate
     

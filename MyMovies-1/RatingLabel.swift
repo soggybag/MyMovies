@@ -24,11 +24,10 @@ class RatingLabel: UILabel {
     var unit: CGFloat = 0
     var rating: Int = 0 {
         didSet {
-            print(#function, "rating: \(rating)")
             var str = ""
             
-            for i in 0 ... 4 {
-                if i <= rating {
+            for i in 1...5 {
+                if rating >= i {
                     str += "★"
                 } else {
                     str += "☆"
@@ -59,6 +58,12 @@ class RatingLabel: UILabel {
         
     }
     
+    
+    
+    func setRatingFor(location: CGPoint) {
+        rating = Int(floor(location.x / unit)) + 1
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         
@@ -66,13 +71,13 @@ class RatingLabel: UILabel {
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let location = touches.first?.location(in: self)
-        print("Begin: \(location?.x)")
+        let location = touches.first!.location(in: self)
+        setRatingFor(location: location)
     }
     
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let location = touches.first?.location(in: self)
-        rating = Int(floor(location!.x / unit))
+        let location = touches.first!.location(in: self)
+        setRatingFor(location: location)
     }
     
     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
