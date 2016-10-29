@@ -114,6 +114,18 @@
 			name = "New Movie App";
 			sourceTree = "<group>";
 		};
+		D886404D1DC471A50092652F /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				D81018A71DC023620067E6EA /* FoodManager.swift */,
+				D81018AD1DC113DE0067E6EA /* MovieDetails.swift */,
+				D8CE5FE31DBE876F008F6DE9 /* WatchedMovie.swift */,
+				D81018AF1DC122410067E6EA /* TestViewController.swift */,
+				D81018A91DC066170067E6EA /* WatchTestViewController.swift */,
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
 		D8B5951D1DB17F8F00F6D95C = {
 			isa = PBXGroup;
 			children = (
@@ -147,14 +159,10 @@
 				D8CE5FE11DBE866B008F6DE9 /* WatchList.swift */,
 				D81018AB1DC06D7D0067E6EA /* WatchedViewController.swift */,
 				D8B5955E1DB188A900F6D95C /* Movie.swift */,
-				D81018B31DC16A8F0067E6EA /* New Movie App */,
-				D81018A71DC023620067E6EA /* FoodManager.swift */,
-				D81018AD1DC113DE0067E6EA /* MovieDetails.swift */,
-				D8CE5FE31DBE876F008F6DE9 /* WatchedMovie.swift */,
 				D8B5955C1DB185BF00F6D95C /* SwiftyJSON.swift */,
 				D8B595641DB191D100F6D95C /* Main.storyboard */,
-				D81018AF1DC122410067E6EA /* TestViewController.swift */,
-				D81018A91DC066170067E6EA /* WatchTestViewController.swift */,
+				D81018B31DC16A8F0067E6EA /* New Movie App */,
+				D886404D1DC471A50092652F /* New Group */,
 				D8B595331DB17F8F00F6D95C /* Assets.xcassets */,
 				D8B595351DB17F8F00F6D95C /* LaunchScreen.storyboard */,
 				D8B595381DB17F8F00F6D95C /* Info.plist */,

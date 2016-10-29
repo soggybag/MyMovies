@@ -48,6 +48,8 @@ class Movie {
         self.duration = duration
     }
     
+    
+    // Initialize with JSON from iTunes id lookup!
     init(json: JSON) {
         // let kind = json["kind"].string!
         self.artist = json["artistName"].string!
@@ -61,7 +63,32 @@ class Movie {
         self.imageURL60 = json["artworkUrl100"].string!
         self.imageURL170 = self.imageURL60
         self.id = String(json["trackId"].int!)
-        
+    }
+    
+    // Initialize with JSON from iTunes RSS lookup
+    init(jsonRSS: JSON) {
+        self.name = jsonRSS["im:name"]["label"].string!
+        self.category = jsonRSS["category"]["attributes"]["label"].string!
+        self.id = jsonRSS["id"]["attributes"]["im:id"].string!
+        self.imageURL60 = jsonRSS["im:image"][0]["label"].string!
+        self.imageURL170 = jsonRSS["im:image"][2]["label"].string!
+        self.summary = jsonRSS["summary"]["label"].string!
+        self.artist = jsonRSS["im:artist"]["label"].string!
+        self.duration = 0
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

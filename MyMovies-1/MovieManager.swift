@@ -34,7 +34,6 @@ class MovieManager {
     }
     
     
-    
     // MARK: Get Top 25 Movies
     
     func loadMovieData() {
@@ -53,9 +52,7 @@ class MovieManager {
             }
             
             let json = JSON(data: data)
-            // print(json)
-            // print(json["feed"]["author"]["name"]["label"].string)
-            // print(json["feed"]["entry"][0]["im:name"]["label"].string)
+            
             guard let entries = json["feed"]["entry"].array else {
                 print("No entries??")
                 return
@@ -66,42 +63,13 @@ class MovieManager {
             self.movies = []
             
             for entry in entries {
-                guard let name = entry["im:name"]["label"].string,
-                    let category = entry["category"]["attributes"]["label"].string,
-                    let id = entry["id"]["attributes"]["im:id"].string,
-                    let imageURL60 = entry["im:image"][0]["label"].string,
-                    let imageURL170 = entry["im:image"][2]["label"].string,
-                    let summary = entry["summary"]["label"].string,
-                    let artist = entry["im:artist"]["label"].string
-                
-                else {
-                        print("Bad entry")
-                        return
-                }
-                
-                // print(Float(entry["link"][1]["im:duration"]["label"].string!))
-                
-                let movie = Movie(name: name,
-                                  category: category,
-                                  id: id,
-                                  imageURL60: imageURL60,
-                                  imageURL170: imageURL170,
-                                  summary: summary,
-                                  artist: artist,
-                                  duration: 0)
-                
-                self.movies.append(movie)
+                self.movies.append(Movie(jsonRSS: entry))
             }
-            
-            // print("*** Movie count: \(self.movies.count)")
             
             if let delegate = self.delegate {
                 DispatchQueue.main.async {
-                    // print(">>> Dispatch Queue")
-                    // print("movies: \(self.movies.count)")
                     delegate.didLoadMovies()
                 }
-                
             }
         })
         
