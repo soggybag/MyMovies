@@ -105,7 +105,14 @@ WatchListDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         print("*** Watched List view will appear")
-        tableView.reloadData()
+        
+        // *** Compare the count of Watch list to what we have in watchedArray 
+        // If they don't match we need to load the watch list again
+        // Challenge: sort the list remove missing items and reload new ones.
+        if watchedArray.count != WatchList.sharedInstance.count {
+            print("Watchlist count doesn't match reload movies")
+            loadWatchedMovies()
+        }
     }
 
     override func viewDidLoad() {
@@ -113,7 +120,8 @@ WatchListDelegate {
 
         tableView.dataSource = self
         tableView.delegate = self
-        loadWatchedMovies()
+        // *** No need for this it should be taken care if in viewWillAppear()
+        // loadWatchedMovies()
     }
 
     override func didReceiveMemoryWarning() {
