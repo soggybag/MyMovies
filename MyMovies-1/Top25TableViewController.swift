@@ -33,6 +33,11 @@ class Top25TableViewController: UITableViewController, MovieManagerDelegate {
         alert.view.addSubview(indicator)
         loadingAlert = alert
         
+        
+        // var vc = storyboard?.instantiateViewController(withIdentifier: "WaitingViewController")
+        
+        
+        
         self.present(alert, animated: true, completion: nil)
     }
 
